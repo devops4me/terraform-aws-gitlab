@@ -22,6 +22,15 @@ variable in_role_arn {
 ######## Mandatory Variables ########
 ######## ################### ########
 
+### ################# ###
+### in_ssh_public_key ###
+### ################# ###
+
+variable in_ssh_public_key {
+    description = "The public key for accessing both the DMZ bastion and the nodes behind enemy lines."
+}
+
+
 /*
 variable in_vpc_id             { description = "The ID of the existing VPC in which to create the subnet network."  }
 variable in_vpc_cidr           { description = "The CIDr block defines the range of VPC allocable IP addresses."    }

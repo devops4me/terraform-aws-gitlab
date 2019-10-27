@@ -28,7 +28,7 @@ module ec2-instance {
 
     in_node_count           = 1
     in_user_data            = data.template_file.cloud_config.rendered
-    in_iam_instance_profile = module.ec2-instance-profile.out_ec2_instance_profile
+    in_iam_instance_profile = module.ec2-instance-profile.out_instance_profile_id
     in_ssh_public_key       = var.in_ssh_public_key
 
     in_ami_id               = data.aws_ami.ubuntu-1804.id
