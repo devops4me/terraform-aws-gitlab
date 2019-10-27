@@ -26,7 +26,7 @@ provider aws {
 module ec2-instance {
     source                  = "github.com/devops4me/terraform-aws-ec2-instance-cluster"
 
-    in_node_count           = "1"
+    in_node_count           = 1
     in_user_data            = data.template_file.cloud_config.rendered
     in_iam_instance_profile = module.ec2-instance-profile.out_ec2_instance_profile
     in_ssh_public_key       = var.in_ssh_public_key
