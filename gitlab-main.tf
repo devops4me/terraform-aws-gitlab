@@ -24,7 +24,7 @@ provider aws {
 ### ---> ###################### <--- ### || < ####### > || ###
 
 module ec2-instance {
-    source                  = "github.com/devops4me/terraform-aws-ec2-instance-cluster"
+    source                  = "github.com/devops4me/terraform-aws-ec2-instances"
 
     in_node_count           = 1
     in_user_data            = data.template_file.cloud_config.rendered
@@ -32,7 +32,7 @@ module ec2-instance {
     in_ssh_public_key       = var.in_ssh_public_key
 
     in_ami_id               = data.aws_ami.ubuntu-1804.id
-    in_subnet_ids           = [ element ( module.sub-network.out_public_subnet_ids, 0 ) ]
+    in_subnet_ids           = [ element ( module.vpc-network.out_public_subnet_ids, 0 ) ]
     in_security_group_ids   = [ module.security-group.out_security_group_id ]
 
     in_ecosystem   = local.ecosystem_name
@@ -43,10 +43,11 @@ module ec2-instance {
 
 module ec2-instance-profile {
 
-    source = "github.com/devops4me/terraform-aws-ec2-instance-profile"
+    source = "github.com/devops4me/terraform-aws-ec2-role-profile"
 
-    in_policy_stmts = data.template_file.iam_policy_stmts.rendered
-
+    in_ec2_policy_stmts = data.template_file.iam_policy_stmts.rendered
+    in_ecosystem_name   = local.ecosystem_name
+    in_tag_timestamp    = local.timestamp
 }
 
 
