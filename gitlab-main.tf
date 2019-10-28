@@ -36,8 +36,8 @@ module ec2-instance {
     in_security_group_ids   = [ module.security-group.out_security_group_id ]
 
     in_ecosystem   = local.ecosystem_name
-    in_timestamp   = local.timestamp
-    in_description = local.description
+    in_timestamp   = var.in_timestamp
+##########################    in_description = local.description
 }
 
 
@@ -47,7 +47,7 @@ module ec2-instance-profile {
 
     in_ec2_policy_stmts = data.template_file.iam_policy_stmts.rendered
     in_ecosystem_name   = local.ecosystem_name
-    in_tag_timestamp    = local.timestamp
+    in_tag_timestamp    = var.in_timestamp
 }
 
 
@@ -67,20 +67,20 @@ module vpc-network {
     in_num_private_subnets = 0
 
     in_ecosystem   = local.ecosystem_name
-    in_timestamp   = local.timestamp
-    in_description = local.description
+    in_timestamp   = var.in_timestamp
+##############    in_description = local.description
 }
 
 
 module security-group {
 
     source     = "github.com/devops4me/terraform-aws-security-group"
-    in_ingress = [ "postgres", "ssh" ]
+    in_ingress = [ "http", "https", "ssh" ]
     in_vpc_id  = module.vpc-network.out_vpc_id
 
     in_ecosystem   = local.ecosystem_name
-    in_timestamp   = local.timestamp
-    in_description = local.description
+    in_timestamp   = var.in_timestamp
+##########    in_description = local.description
 }
 
 ################################################################################################
@@ -90,10 +90,7 @@ module security-group {
 
 locals {
 
-    fresh_db_name  = "brandnewdb"
-    clone_db_name  = "snapshotdb"
-
-    ecosystem_name = "sanjievesdb"
+    ecosystem_name = "gitlab-repo"
     timestamp = formatdate( "YYMMDDhhmmss", timestamp() )
     date_time = formatdate( "EEEE DD-MMM-YY hh:mm:ss ZZZ", timestamp() )
     description = "was created by me on ${ local.date_time }."
