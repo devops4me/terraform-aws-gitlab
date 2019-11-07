@@ -31,6 +31,40 @@ variable in_ssh_public_key {
 }
 
 
+### ############ ###
+### in_ecosystem ###
+### ############ ###
+
+variable in_ecosystem {
+    description = "Creational stamp binding all infrastructure components created on behalf of this ecosystem instance."
+    default = "security-grp"
+    type    = string
+}
+
+
+### ############ ###
+### in_timestamp ###
+### ############ ###
+
+variable in_timestamp {
+    description = "A timestamp for resource tags in the format ymmdd-hhmm like 80911-1435"
+    default     = "timestamp"
+    type        = string
+}
+
+
+### ############## ###
+### in_description ###
+### ############## ###
+
+variable in_description {
+    description = "Ubiquitous note detailing who, when, where and why for every infrastructure component."
+    default     = "This VPC network was created for an ecosystem."
+    type        = string
+}
+
+
+
 /*
 variable in_vpc_id             { description = "The ID of the existing VPC in which to create the subnet network."  }
 variable in_vpc_cidr           { description = "The CIDr block defines the range of VPC allocable IP addresses."    }

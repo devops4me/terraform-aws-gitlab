@@ -37,7 +37,6 @@ module ec2-instance {
 
     in_ecosystem   = local.ecosystem_name
     in_timestamp   = var.in_timestamp
-##########################    in_description = local.description
 }
 
 
@@ -68,7 +67,7 @@ module vpc-network {
 
     in_ecosystem   = local.ecosystem_name
     in_timestamp   = var.in_timestamp
-##############    in_description = local.description
+
 }
 
 
@@ -80,18 +79,17 @@ module security-group {
 
     in_ecosystem   = local.ecosystem_name
     in_timestamp   = var.in_timestamp
-##########    in_description = local.description
+
 }
 
-################################################################################################
 ################################################################################################
 ################################################################################################
 
 
 locals {
 
-    ecosystem_name = "gitlab-repo"
+    ecosystem_name = "nginx-webserver"
     timestamp = formatdate( "YYMMDDhhmmss", timestamp() )
     date_time = formatdate( "EEEE DD-MMM-YY hh:mm:ss ZZZ", timestamp() )
-    description = "was created by me on ${ local.date_time }."
+    description = "was created by Apollo Akora on ${ local.date_time }."
 }

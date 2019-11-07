@@ -20,13 +20,13 @@ data template_file cloud_config {
     template = file( "${path.module}/cloud-config.yaml" )
 
     vars = {
-        gitlab_volume_bucket_name = "gitlab.volume.bucket"
+        nginx_volume_bucket_name = "nginx.volume.bucket"
     }
 }
 
 
 data template_file iam_policy_stmts {
-    template = file( "${path.module}/gitlab-policies.json" )
+    template = file( "${path.module}/nginx-policies.json" )
 }
 
 
